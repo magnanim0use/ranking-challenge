@@ -72,10 +72,22 @@ export default class ResultsCalculator {
 		);
 
 		let order = 1;
+		let previousScore;
 		return map(
 			orderedScores,
 			({ name, score }) => {
-				return `${order ++}. ${name} ${score}`;
+				const nameAndScore = `${name} ${score}`;
+
+				/*
+					Don't increment ranking if team is tied with previous entry.
+				*/
+				if (previousScore && previousScore !== score) {
+					order++;
+				}
+
+				previousScore = score;
+
+				return `${order}. ${name} ${score}`;
 			}
 		)
 	}
