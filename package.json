@@ -1,0 +1,20 @@
+{
+  "name": "leapyear-coding-challenge",
+  "version": "0.1.0",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "start": "npm run build -w; node build/index.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "@types/lodash": "^4.14.144",
+    "@types/node": "^12.12.3",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  }
+}
