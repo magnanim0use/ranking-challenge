@@ -21,3 +21,8 @@ Example:
 `
 	npm run start sample-input.text
 `
+
+To run tests: (using Jest)
+`
+	npm test
+`

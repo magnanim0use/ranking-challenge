@@ -75,19 +75,20 @@ export default class ResultsCalculator {
 		let previousScore;
 		return map(
 			orderedScores,
-			({ name, score }) => {
+			({ name, score }, index) => {
 				const nameAndScore = `${name} ${score}`;
 
 				/*
 					Don't increment ranking if team is tied with previous entry.
 				*/
 				if (previousScore && previousScore !== score) {
-					order++;
+					order = index + 1;
 				}
 
 				previousScore = score;
+				const pointTerminology = score === 1 ? 'pt' : 'pts';
 
-				return `${order}. ${name} ${score}`;
+				return `${order}. ${name}, ${score} ${ pointTerminology }`;
 			}
 		)
 	}

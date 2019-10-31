@@ -1,4 +1,4 @@
-const ResultsCalculator = require('../src/services/results-calculator');
+import ResultsCalculator from '../src/services/results-calculator';
 const resultsCalculator = new ResultsCalculator();
 
 test('format results correctly', () => {
@@ -25,6 +25,6 @@ test('format results correctly', () => {
 	});
 
 	const sortedResults = resultsCalculator.sortResults();
-	expect(sortedResults).toBe(expectedResults);
+	expect(sortedResults).toStrictEqual(expectedResults);
 
 });
