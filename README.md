@@ -3,7 +3,7 @@ This app will read a list of games and scores, either from a specified text file
 Set-up
 
 `
-	git clone https://github.com/mtcrushmore/leapyear-challenge
+	git clone https://github.com/mtcrushmore/ranking-challenge
 	npm install
 `
 
@@ -17,9 +17,9 @@ To define an input text file, run
 	npm run start <name of file>
 `
 
-Example:
+Example (assuming sample-input.txt is in your repo root directory):
 `
-	npm run start sample-input.text
+	npm run start sample-input.txt
 `
 
 To run tests: (using Jest)
