@@ -6,7 +6,7 @@ import {
 
 export default class ResultsCalculator {
 
-	results: object = {}
+	results: { [key: string]: number } = {}
 
 	parseLine (line: string) {
 		return line.split(', ');
@@ -29,14 +29,14 @@ export default class ResultsCalculator {
 	}
 
 	getGameResults (teams: Array<string>) {
-		const team1 = this.parseName(teams[0]);
-		const team2 = this.parseName(teams[1]);
+		const team1: string = this.parseName(teams[0]);
+		const team2: string = this.parseName(teams[1]);
 
-		const score1 = this.parseScore(teams[0]);
-		const score2 = this.parseScore(teams[1]);
+		const score1: number = this.parseScore(teams[0]);
+		const score2: number = this.parseScore(teams[1]);
 
-		let team1Points;
-		let team2Points;
+		let team1Points: number;
+		let team2Points: number;
 
 		if (score1 === score2) {
 			team1Points = 1;
@@ -71,8 +71,9 @@ export default class ResultsCalculator {
 			)
 		);
 
-		let order = 1;
-		let previousScore;
+		let order: number = 1;
+		let previousScore: number;
+
 		return map(
 			orderedScores,
 			({ name, score }, index) => {

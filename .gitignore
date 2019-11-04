@@ -1,2 +1,4 @@
 node_modules
 build
+sample-input.txt
+expected-output.txt
