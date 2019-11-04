@@ -41,6 +41,7 @@ export default class ResultsCalculator {
 		let team2Points: number;
 
 		if (score1 === score2) {
+		
 			team1Points = 1;
 			team2Points = 1;
 		} else if (score1 > score2) {
