@@ -56,7 +56,7 @@ export default class ResultsCalculator {
 	}
 
 	sortResults () {
-	
+
 		const totalScores = map(
 			this.results,
 			(score, name) => {
@@ -91,6 +91,7 @@ export default class ResultsCalculator {
 
 				previousScore = score;
 				const pointTerminology = score === 1 ? 'pt' : 'pts';
+
 
 				return `${order}. ${name}, ${score} ${ pointTerminology }`;
 			}
