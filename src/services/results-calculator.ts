@@ -56,6 +56,7 @@ export default class ResultsCalculator {
 	}
 
 	sortResults () {
+	
 		const totalScores = map(
 			this.results,
 			(score, name) => {
