@@ -6,7 +6,9 @@ import {
 
 export default class ResultsCalculator {
 
-	results: { [key: string]: number } = {}
+	results: { 
+		[key: string]: number 
+	} = {}
 
 	parseLine (line: string) {
 		return line.split(', ');
