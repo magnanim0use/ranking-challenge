@@ -4,6 +4,7 @@ import ResultsCalculator from './services/results-calculator';
 
 /*
 	If input file defined in command line, use as input.
+	Otherwise, we will use process.stdin.
 */
 const inputFile = process.argv[2];
 const resultsCalculator = new ResultsCalculator();
