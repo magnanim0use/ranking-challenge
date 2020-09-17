@@ -6,7 +6,28 @@ import {
 
 export default class ResultsCalculator {
 
-	results: { [key: string]: number } = {}
+	results: {
+		[key:string]: {
+			name: string,
+			totalScore: number,
+			gd: number
+		}
+	} = {}
+
+	// results: {
+	// 	name: object
+	// }
+
+	/*
+	{
+		Tarantulas: {
+			name: 'Tarantulas',
+			totalScore: 6,
+			goalsWon: 4, 
+			goalsLost: 1
+		}
+	}
+	*/
 
 	parseLine (line: string) {
 		return line.split(', ');
@@ -22,10 +43,22 @@ export default class ResultsCalculator {
 		);
 	}
 
-	addScore (team: string, score: number) {
-		this.results[team] = this.results[team] ?
-			this.results[team] + score :
-			score;
+	addScore (team: string, score: number, gd: number) {
+		// this.results[team] = this.results[team] ?
+		// 	this.results[team] + score :
+		// 	score;
+		this.results[team] = this.results[team] ? 
+			{
+				name: team,
+				totalScore: this.results[team].totalScore + score,
+				gd: this.results[team].gd + gd
+			}
+		: 
+			{
+				name: team,
+				totalScore: score,
+				gd
+			}
 	}
 
 	getGameResults (teams: Array<string>) {
@@ -49,17 +82,18 @@ export default class ResultsCalculator {
 			team2Points = 3;
 		}
 
-		this.addScore(team1, team1Points);
-		this.addScore(team2, team2Points);
+		this.addScore(team1, team1Points, score1 - score2);
+		this.addScore(team2, team2Points, score2 - score1);
 	}
 
 	sortResults () {
 		const totalScores = map(
 			this.results,
-			(score, name) => {
+			({ name, totalScore, gd }, team) => {
 				return {
 					name,
-					score
+					totalScore,
+					gd
 				}
 			}
 		);
@@ -67,29 +101,35 @@ export default class ResultsCalculator {
 		const orderedScores = reverse(
 			orderBy(
 				totalScores,
-				(obj) => obj.score
+				// (obj) => obj.totalScore
+				[ 'totalScore', 'gd' ]
 			)
 		);
 
 		let order: number = 1;
 		let previousScore: number;
+		let previousGd: number;
 
 		return map(
 			orderedScores,
-			({ name, score }, index) => {
-				const nameAndScore = `${name} ${score}`;
+			({ name, totalScore, gd }, index) => {
+				const nameAndScore = `${name} ${totalScore}`;
 
 				/*
 					Don't increment ranking if team is tied with previous entry.
 				*/
-				if (previousScore && previousScore !== score) {
+				if (previousScore && previousScore > totalScore ||
+					(previousScore === totalScore && previousGd > gd)
+				) {
 					order = index + 1;
 				}
 
-				previousScore = score;
-				const pointTerminology = score === 1 ? 'pt' : 'pts';
+				previousScore = totalScore;
+				previousGd = gd;
+				const pointTerminology = totalScore === 1 ? 'pt' : 'pts';
 
-				return `${order}. ${name}, ${score} ${ pointTerminology }`;
+
+				return `${order}. ${name}, ${totalScore} ${ pointTerminology }, gd: ${gd}`;
 			}
 		)
 	}
