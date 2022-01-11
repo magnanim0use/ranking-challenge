@@ -77,7 +77,7 @@ export default class ResultsCalculator {
 		return map(
 			orderedScores,
 			({ name, score }, index) => {
-				const nameAndScore = `${name} ${score}`;
+				const nameAndScore = `${name} ${score}`
 
 				/*
 					Don't increment ranking if team is tied with previous entry.
